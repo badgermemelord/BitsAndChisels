@@ -8,6 +8,8 @@ import io.github.coolcrabs.brachyura.maven.MavenId;
 import io.github.coolcrabs.brachyura.minecraft.Minecraft;
 import io.github.coolcrabs.brachyura.minecraft.VersionMeta;
 import net.fabricmc.mappingio.tree.MappingTree;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class Buildscript extends FabricProject {
 
@@ -28,7 +30,7 @@ public class Buildscript extends FabricProject {
 
     @Override
     public FabricLoader getLoader() {
-        return new FabricLoader(FabricMaven.URL, FabricMaven.loader("0.13.3"));
+        return new FabricLoader(FabricMaven.URL, FabricMaven.loader("0.15.11"));
     }
 
     @Override
@@ -53,7 +55,13 @@ public class Buildscript extends FabricProject {
         for (String[] module : fapiModules) {
             d.addMaven(FabricMaven.URL, new MavenId(FabricMaven.GROUP_ID + ".fabric-api", module[0], module[1]), ModDependencyFlag.RUNTIME, ModDependencyFlag.COMPILE);
         }
-        d.addMaven("https://storage.googleapis.com/devan-maven/", new MavenId("net.devtech:Stacc:1.2.3"), ModDependencyFlag.RUNTIME, ModDependencyFlag.COMPILE, ModDependencyFlag.JIJ);
+        //d.addMaven("https://storage.googleapis.com/devan-maven/", new MavenId("net.devtech:Stacc:1.2.3"), ModDependencyFlag.RUNTIME, ModDependencyFlag.COMPILE, ModDependencyFlag.JIJ);
+        //d.add("C://Users//paolo//Documents//GitHub//Stacc//build//libs", new MavenId("net.devtech:Stacc:1.2.3"), ModDependencyFlag.RUNTIME, ModDependencyFlag.COMPILE, ModDependencyFlag.JIJ);
+/*        d.add(new JavaJarDependency(Paths.get("C://Users//paolo//Documents//GitHub//Stacc//build//libs"), Paths.get("C://Users//paolo//Documents//GitHub//Stacc//build//libs"),
+                new MavenId("net.devtech:Stacc:1.3.2")), ModDependencyFlag.RUNTIME, ModDependencyFlag.COMPILE, ModDependencyFlag.JIJ);*/
+        d.add(new JavaJarDependency(Paths.get("C:\\Users\\paolo\\Documents\\GitHub\\Stacc\\build\\libs\\stacc-1.3.2.jar"), Paths.get("C:\\Users\\paolo\\Documents\\GitHub\\Stacc\\build\\libs\\stacc-1.3.2-sources.jar"),
+                new MavenId("net.devtech:Stacc:1.3.2")), ModDependencyFlag.RUNTIME, ModDependencyFlag.COMPILE, ModDependencyFlag.JIJ);
+
         // Compat
         d.addMaven("https://maven.shedaniel.me/", new MavenId("me.shedaniel:RoughlyEnoughItems-api-fabric:6.0.247-alpha"), ModDependencyFlag.COMPILE);
         d.addMaven("https://maven.vram.io", new MavenId("io.vram:frex-fabric-mc118:6.0.236"), ModDependencyFlag.COMPILE);
